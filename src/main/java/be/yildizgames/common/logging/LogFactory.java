@@ -90,7 +90,9 @@ public class LogFactory {
         LoggingEventCompositeJsonEncoder ple = new LoggingEventCompositeJsonEncoder();
         ple.setContext(context);
         ple.start();
-        this.appender = new LogstashTcpSocketAppender();
+        LogstashTcpSocketAppender lsAppender = new LogstashTcpSocketAppender();
+        //FIXME add destination
+        this.appender = lsAppender;
         this.appender.setContext(context);
         this.appender.start();
     }
