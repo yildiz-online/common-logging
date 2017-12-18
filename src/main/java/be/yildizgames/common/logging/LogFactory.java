@@ -94,6 +94,9 @@ public class LogFactory {
     }
 
     public void configureForLogstash(String url, Level level) {
+        if(url == null || level == null) {
+            throw new AssertionError("Null parameters are not allowed");
+        }
         if(manual) {
             return;
         }

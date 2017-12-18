@@ -30,10 +30,18 @@ import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+
 /**
  * @author Grégory Van den Borre
  */
 class LogFactoryTest {
+
+    //------------------------------------------------
+    //Use different classes to use different loggers.-
+    //------------------------------------------------
 
     @Nested
     class FromConfigFile {
@@ -46,7 +54,7 @@ class LogFactoryTest {
         @Test
         void noConfigFile() {
             LogFactory factory = new LogFactory();
-            Logger logger = factory.getLogger(LogFactory.class);
+            Logger logger = factory.getLogger(Integer.class);
             Assertions.assertFalse(logger.isTraceEnabled());
             Assertions.assertTrue(logger.isDebugEnabled());
             Assertions.assertTrue(logger.isInfoEnabled());
@@ -65,15 +73,18 @@ class LogFactoryTest {
     class fromConfiguration {
 
         @Test
-        void fileHappyFlow() {
-
-        }
-
-        @Test
-        void fileNotExistingFile() {
+        void happyFlow() throws IOException {
+            Path file = Files.createTempDirectory(String.valueOf(System.nanoTime())).resolve("test.log");
             LogFactory factory = new LogFactory();
-            factory.configureForFile("nowhere", Level.INFO);
+            factory.configureForFile(file.toString(), Level.INFO);
+            Logger logger = factory.getLogger(Long.class);
+            Assertions.assertFalse(logger.isTraceEnabled());
+            Assertions.assertFalse(logger.isDebugEnabled());
+            Assertions.assertTrue(logger.isInfoEnabled());
+            Assertions.assertTrue(logger.isErrorEnabled());
+            Assertions.assertTrue(logger.isWarnEnabled());
         }
+
 
         @Test
         void fileNullFile() {
@@ -84,7 +95,7 @@ class LogFactoryTest {
         @Test
         void fileNullLevel() {
             LogFactory factory = new LogFactory();
-            Assertions.assertThrows(AssertionError.class, () -> factory.configureForFile("path", null));
+            Assertions.assertThrows(AssertionError.class, () -> factory.configureForFile("file.log", null));
         }
 
         @Test
@@ -99,12 +110,14 @@ class LogFactoryTest {
 
         @Test
         void logstashNullUrl() {
-
+            LogFactory factory = new LogFactory();
+            Assertions.assertThrows(AssertionError.class, () -> factory.configureForLogstash(null, Level.INFO));
         }
 
         @Test
         void logstashNullLevel() {
-
+            LogFactory factory = new LogFactory();
+            Assertions.assertThrows(AssertionError.class, () -> factory.configureForLogstash("localhost:8080", null));
         }
     }
 }
