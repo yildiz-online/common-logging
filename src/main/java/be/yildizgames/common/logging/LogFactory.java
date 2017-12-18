@@ -44,11 +44,21 @@ import java.nio.charset.Charset;
  */
 public class LogFactory {
 
+    private static final LogFactory INSTANCE = new LogFactory();
+
     private boolean manual = false;
 
     private Appender<ILoggingEvent> appender;
 
     private Level level = Level.INFO;
+
+    LogFactory() {
+        super();
+    }
+
+    public static LogFactory getInstance() {
+        return INSTANCE;
+    }
 
     public Logger getLogger(Class clazz) {
         if (manual) {
