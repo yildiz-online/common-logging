@@ -24,6 +24,7 @@
 
 package be.yildizgames.common.logging;
 
+import ch.qos.logback.classic.Level;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -70,17 +71,20 @@ class LogFactoryTest {
 
         @Test
         void fileNotExistingFile() {
-
+            LogFactory factory = new LogFactory();
+            factory.configureForFile("nowhere", Level.INFO);
         }
 
         @Test
         void fileNullFile() {
-
+            LogFactory factory = new LogFactory();
+            Assertions.assertThrows(AssertionError.class, () -> factory.configureForFile(null, Level.INFO));
         }
 
         @Test
         void fileNullLevel() {
-
+            LogFactory factory = new LogFactory();
+            Assertions.assertThrows(AssertionError.class, () -> factory.configureForFile("path", null));
         }
 
         @Test

@@ -71,6 +71,9 @@ public class LogFactory {
     }
 
     public void configureForFile(String file, Level level) {
+        if(file == null || level == null) {
+            throw new AssertionError("Null parameters are not allowed");
+        }
         if(manual) {
             return;
         }
