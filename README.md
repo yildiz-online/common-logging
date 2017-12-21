@@ -1,7 +1,7 @@
 # Yildiz-Engine common-logging
 
 This is the official repository of The Common logging library, part of the Yildiz-Engine project.
-The common mapping library is a set of utility and helper classes to handle easily logging.
+The common logging library is a set of utility and helper classes to handle easily logging.
 
 ## Features
 
