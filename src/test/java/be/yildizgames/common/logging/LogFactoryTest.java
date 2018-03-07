@@ -97,27 +97,5 @@ class LogFactoryTest {
             LogFactory factory = new LogFactory();
             Assertions.assertThrows(AssertionError.class, () -> factory.configureForFile("file.log", null));
         }
-
-        @Test
-        void logstashHappyFlow() {
-
-        }
-
-        @Test
-        void logstashNotAvailable() {
-
-        }
-
-        @Test
-        void logstashNullUrl() {
-            LogFactory factory = new LogFactory();
-            Assertions.assertThrows(AssertionError.class, () -> factory.configureForLogstash(null, Level.INFO));
-        }
-
-        @Test
-        void logstashNullLevel() {
-            LogFactory factory = new LogFactory();
-            Assertions.assertThrows(AssertionError.class, () -> factory.configureForLogstash("localhost:8080", null));
-        }
     }
 }

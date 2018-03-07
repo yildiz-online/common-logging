@@ -30,8 +30,6 @@ import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
 import ch.qos.logback.classic.spi.ILoggingEvent;
 import ch.qos.logback.core.Appender;
 import ch.qos.logback.core.FileAppender;
-import net.logstash.logback.appender.LogstashTcpSocketAppender;
-import net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -89,26 +87,6 @@ public class LogFactory {
         fileAppender.setFile(file);
         fileAppender.setEncoder(ple);
         this.appender = fileAppender;
-        this.appender.setContext(context);
-        this.appender.start();
-    }
-
-    public void configureForLogstash(String url, Level level) {
-        if(url == null || level == null) {
-            throw new AssertionError("Null parameters are not allowed");
-        }
-        if(manual) {
-            return;
-        }
-        this.manual = true;
-        this.level = level;
-        LoggerContext context = (LoggerContext) org.slf4j.LoggerFactory.getILoggerFactory();
-        LoggingEventCompositeJsonEncoder ple = new LoggingEventCompositeJsonEncoder();
-        ple.setContext(context);
-        ple.start();
-        LogstashTcpSocketAppender lsAppender = new LogstashTcpSocketAppender();
-        //FIXME add destination
-        this.appender = lsAppender;
         this.appender.setContext(context);
         this.appender.start();
     }
