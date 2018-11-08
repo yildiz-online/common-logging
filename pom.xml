@@ -33,7 +33,7 @@
   <url>https://bitbucket.org/yildiz-engine-team/common-logging</url>
 
   <artifactId>common-logging</artifactId>
-  <version>1.0.2-SNAPSHOT</version>
+  <version>1.0.2</version>
 
   <packaging>jar</packaging>
   <inceptionYear>2017</inceptionYear>
@@ -49,6 +49,11 @@
   </parent>
 
   <dependencies>
+    <dependency>
+      <groupId>be.yildiz-games</groupId>
+      <artifactId>common-exception</artifactId>
+      <version>1.0.1</version>
+    </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
