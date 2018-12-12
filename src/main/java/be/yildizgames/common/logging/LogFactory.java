@@ -25,16 +25,8 @@
 package be.yildizgames.common.logging;
 
 import be.yildizgames.common.exception.implementation.ImplementationException;
-import ch.qos.logback.classic.Level;
-import ch.qos.logback.classic.LoggerContext;
-import ch.qos.logback.classic.encoder.PatternLayoutEncoder;
-import ch.qos.logback.classic.spi.ILoggingEvent;
-import ch.qos.logback.core.Appender;
-import ch.qos.logback.core.FileAppender;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.nio.charset.StandardCharsets;
 
 /**
  * Create logger instances.
@@ -47,9 +39,7 @@ public class LogFactory {
 
     private boolean manual = false;
 
-    private Appender<ILoggingEvent> appender;
-
-    private Level level = Level.INFO;
+    private LoggerImplementation implementation = new LogbackLoggerImplementation();
 
     LogFactory() {
         super();
@@ -61,34 +51,67 @@ public class LogFactory {
 
     public Logger getLogger(Class clazz) {
         if (manual) {
-            ch.qos.logback.classic.Logger l = (ch.qos.logback.classic.Logger) LoggerFactory.getLogger(clazz);
-            l.addAppender(this.appender);
-            l.setLevel(level);
-            return l;
+            return this.implementation.getLogger(clazz);
         }
         return LoggerFactory.getLogger(clazz);
     }
 
-    public void configureForFile(String file, Level level) {
-        ImplementationException.throwForNull(file);
-        ImplementationException.throwForNull(level);
+    /**
+     * Create a new pattern builder.
+     * @return The created pattern builder.
+     */
+    public final PatternBuilder createPatternBuilder() {
+        return new LogbackPatternBuilder();
+    }
+
+    public final void configureFromProperties(LoggerConfiguration properties) {
+        switch (properties.getOutput()) {
+            case TCP:
+                this.configureForTcp(properties.getTcpHost(), properties.getTcpPort(), properties.getLevel(), properties.getPattern());
+                break;
+            default:
+                this.configureForFile(properties.getFile(), properties.getLevel(), properties.getPattern());
+        }
+    }
+
+    /**
+     * Configure manually the logger to write to a file.
+     * @param file File where logs are written.
+     * @param level Level to use.
+     */
+    public final void configureForFile(String file, LoggerLevel level) {
+        this.configureForFile(file, level, "%d{HH:mm:ss.SSS} [%thread] %-5level %logger{20} - %msg%n");
+    }
+
+    /**
+     * Configure manually the logger to write to a file.
+     * @param file File where logs are written.
+     * @param level Level to use.
+     * @param pattern logging pattern.
+     */
+    public final void configureForFile(String file, LoggerLevel level, String pattern) {
         if(manual) {
             return;
         }
+        ImplementationException.throwForNull(file);
         this.manual = true;
-        this.level = level;
-        LoggerContext context = (LoggerContext) org.slf4j.LoggerFactory.getILoggerFactory();
-        PatternLayoutEncoder ple = new PatternLayoutEncoder();
-        ple.setContext(context);
-        ple.setPattern("%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n");
-        ple.setCharset(StandardCharsets.UTF_8);
-        ple.start();
-        FileAppender<ILoggingEvent> fileAppender = new FileAppender<>();
-        fileAppender.setFile(file);
-        fileAppender.setEncoder(ple);
-        this.appender = fileAppender;
-        this.appender.setContext(context);
-        this.appender.start();
+        this.implementation.configureForFile(file, level, pattern);
+    }
+
+    /**
+     * Configure manually the logger to write to a tcp input.
+     * @param host TCP host.
+     * @param port TCP port.
+     * @param level Level to use.
+     * @param pattern logging pattern.
+     */
+    public final void configureForTcp(String host, int port, LoggerLevel level, String pattern) {
+        if(manual) {
+            return;
+        }
+        ImplementationException.throwForNull(host);
+        this.manual = true;
+        this.implementation.configureForTcp(host, port, level, pattern);
     }
 
 }

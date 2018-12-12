@@ -45,6 +45,17 @@ class LogFactoryTest {
     //------------------------------------------------
 
     @Nested
+    class createPatternBuilder {
+
+        @Test
+        void happyFlow() {
+            PatternBuilder builder = LogFactory.getInstance().createPatternBuilder();
+            Assertions.assertNotNull(builder);
+        }
+
+    }
+
+    @Nested
     class FromConfigFile {
 
         @Test
@@ -77,7 +88,7 @@ class LogFactoryTest {
         void happyFlow() throws IOException {
             Path file = Files.createTempDirectory(String.valueOf(System.nanoTime())).resolve("test.log");
             LogFactory factory = new LogFactory();
-            factory.configureForFile(file.toString(), Level.INFO);
+            factory.configureForFile(file.toString(), LoggerLevel.INFO);
             Logger logger = factory.getLogger(Long.class);
             Assertions.assertFalse(logger.isTraceEnabled());
             Assertions.assertFalse(logger.isDebugEnabled());
@@ -90,7 +101,7 @@ class LogFactoryTest {
         @Test
         void fileNullFile() {
             LogFactory factory = new LogFactory();
-            Assertions.assertThrows(ImplementationException.class, () -> factory.configureForFile(null, Level.INFO));
+            Assertions.assertThrows(ImplementationException.class, () -> factory.configureForFile(null, LoggerLevel.INFO));
         }
 
         @Test

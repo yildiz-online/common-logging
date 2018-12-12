@@ -7,6 +7,7 @@ module be.yildizgames.common.logging {
     requires slf4j.api;
     requires logback.core;
     requires be.yildizgames.common.exception;
+    requires splunk.library.javalogging;
 
     exports be.yildizgames.common.logging;
 }
