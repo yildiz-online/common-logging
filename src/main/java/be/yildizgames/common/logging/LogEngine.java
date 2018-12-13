@@ -21,15 +21,29 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  SOFTWARE.
  *
  */
+
 package be.yildizgames.common.logging;
 
-import org.slf4j.Logger;
+import java.io.IOException;
 
-public interface LoggerImplementation {
+/**
+ * Create logger instances.
+ * By default it will try to use the logback.xml configuration file, but the configuration can be overridden by code.
+ * @author Grégory Van den Borre
+ */
+public interface LogEngine {
 
-    Logger getLogger(Class clazz);
+    /**
+     * Create a new pattern builder.
+     * @return The created pattern builder.
+     */
+    PatternBuilder createPatternBuilder();
 
-    void configureForTcp(String host, int port, LoggerLevel level, String pattern);
+    /**
+     * Set the path to the logger configuration file.
+     * @param path Path of the configuration file.
+     */
+    void setConfigurationPath(String path);
 
-    void configureForFile(String file, LoggerLevel level, String pattern);
+    void configureFromProperties(LoggerConfiguration properties) throws IOException;
 }

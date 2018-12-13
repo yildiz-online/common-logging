@@ -21,27 +21,34 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  SOFTWARE.
  *
  */
-package be.yildizgames.common.logging;
+package be.yildizgames.common.logging.internal;
 
-import ch.qos.logback.classic.Level;
+import be.yildizgames.common.exception.implementation.ImplementationException;
+import be.yildizgames.common.logging.LogEngine;
+import be.yildizgames.common.logging.LoggerConfiguration;
+import be.yildizgames.common.logging.PatternBuilder;
 
-public class LogbackLoggerLevelMapper implements LoggerLevelMapper<Level> {
+import java.io.IOException;
+
+public class LogbackLogEngine implements LogEngine {
+
+    private final LogbackConfigFileGenerator generator = new LogbackConfigFileGenerator();
 
     @Override
-    public Level map(LoggerLevel level) {
-        switch (level) {
-            case TRACE:
-                return Level.TRACE;
-            case DEBUG:
-                return Level.DEBUG;
-            case INFO:
-                return Level.INFO;
-            case WARN:
-                return Level.WARN;
-            case ERROR:
-                return Level.ERROR;
-            default:
-                return Level.INFO;
-        }
+    public PatternBuilder createPatternBuilder() {
+        return new LogbackPatternBuilder();
     }
+
+    @Override
+    public void setConfigurationPath(String path) {
+        ImplementationException.throwForNull(path);
+        System.setProperty("logback.configurationFile", path);
+    }
+
+    @Override
+    public void configureFromProperties(LoggerConfiguration properties) throws IOException {
+        this.generator.generate(properties);
+    }
+
+
 }

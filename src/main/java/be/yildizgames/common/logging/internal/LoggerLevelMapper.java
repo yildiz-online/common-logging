@@ -21,28 +21,17 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  SOFTWARE.
  *
  */
-package be.yildizgames.common.logging;
+package be.yildizgames.common.logging.internal;
 
-public interface LoggerConfiguration {
+import be.yildizgames.common.logging.LoggerLevel;
 
-    String getPattern();
+/**
+ * Map a logger level value to an concrete logger level value.
+ * @param <T> Concrete logger level type.
+ * @author Grégory Van den Borre
+ */
+public interface LoggerLevelMapper <T> {
 
-    LoggerLevel getLevel();
-
-    SupportedOutput getOutput();
-
-    String getTcpHost();
-
-    int getTcpPort();
-
-    String getOutputFile();
-
-    String getConfigurationFile();
-
-    enum SupportedOutput {
-
-        FILE, TCP, CONSOLE
-
-    }
+    T map(LoggerLevel level);
 
 }

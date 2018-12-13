@@ -21,7 +21,9 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  SOFTWARE.
  *
  */
-package be.yildizgames.common.logging;
+package be.yildizgames.common.logging.internal;
+
+import be.yildizgames.common.logging.PatternBuilder;
 
 /**
  * Logback implementation for the pattern builder.

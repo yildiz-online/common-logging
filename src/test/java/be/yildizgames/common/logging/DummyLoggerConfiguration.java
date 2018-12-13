@@ -23,41 +23,39 @@
  */
 package be.yildizgames.common.logging;
 
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+public class DummyLoggerConfiguration implements LoggerConfiguration {
+    @Override
+    public String getPattern() {
+        return "%n";
+    }
 
-class LogbackPatternBuilderTest {
+    @Override
+    public LoggerLevel getLevel() {
+        return LoggerLevel.DEBUG;
+    }
 
-    @Nested
-    class Build {
+    @Override
+    public SupportedOutput getOutput() {
+        return SupportedOutput.FILE;
+    }
 
-        @Test
-        void happyFlow() {
-            String result = new LogbackPatternBuilder()
-                    .date()
-                    .context("app")
-                    .level()
-                    .logger()
-                    .thread()
-                    .message()
-                    .build();
-            Assertions.assertEquals("%d{HH:mm:ss.SSS} app %level %logger [%thread] %msg%n", result);
-        }
+    @Override
+    public String getTcpHost() {
+        return "localhost";
+    }
 
-        @Test
-        void withSeparator() {
-            String result = new LogbackPatternBuilder()
-                    .date()
-                    .context("app")
-                    .level()
-                    .logger()
-                    .withSeparator("|")
-                    .thread()
-                    .message()
-                    .build();
-            Assertions.assertEquals("%d{HH:mm:ss.SSS}|app|%level|%logger|[%thread]|%msg%n", result);
-        }
+    @Override
+    public int getTcpPort() {
+        return 25;
+    }
 
+    @Override
+    public String getOutputFile() {
+        return "/output";
+    }
+
+    @Override
+    public String getConfigurationFile() {
+        return "config";
     }
 }

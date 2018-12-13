@@ -21,28 +21,44 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  SOFTWARE.
  *
  */
-package be.yildizgames.common.logging;
+package be.yildizgames.common.logging.internal;
 
-public interface LoggerConfiguration {
+import be.yildizgames.common.logging.internal.LogbackPatternBuilder;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
 
-    String getPattern();
+class LogbackPatternBuilderTest {
 
-    LoggerLevel getLevel();
+    @Nested
+    class Build {
 
-    SupportedOutput getOutput();
+        @Test
+        void happyFlow() {
+            String result = new LogbackPatternBuilder()
+                    .date()
+                    .context("app")
+                    .level()
+                    .logger()
+                    .thread()
+                    .message()
+                    .build();
+            Assertions.assertEquals("%d{HH:mm:ss.SSS} app %level %logger [%thread] %msg%n", result);
+        }
 
-    String getTcpHost();
-
-    int getTcpPort();
-
-    String getOutputFile();
-
-    String getConfigurationFile();
-
-    enum SupportedOutput {
-
-        FILE, TCP, CONSOLE
+        @Test
+        void withSeparator() {
+            String result = new LogbackPatternBuilder()
+                    .date()
+                    .context("app")
+                    .level()
+                    .logger()
+                    .withSeparator("|")
+                    .thread()
+                    .message()
+                    .build();
+            Assertions.assertEquals("%d{HH:mm:ss.SSS}|app|%level|%logger|[%thread]|%msg%n", result);
+        }
 
     }
-
 }

@@ -21,15 +21,28 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  SOFTWARE.
  *
  */
-package be.yildizgames.common.logging;
+package be.yildizgames.common.logging.internal;
 
-/**
- * Map a logger level value to an concrete logger level value.
- * @param <T> Concrete logger level type.
- * @author Grégory Van den Borre
- */
-public interface LoggerLevelMapper <T> {
+import be.yildizgames.common.logging.LoggerLevel;
+import ch.qos.logback.classic.Level;
 
-    T map(LoggerLevel level);
+public class LogbackLoggerLevelMapper implements LoggerLevelMapper<Level> {
 
+    @Override
+    public Level map(LoggerLevel level) {
+        switch (level) {
+            case TRACE:
+                return Level.TRACE;
+            case DEBUG:
+                return Level.DEBUG;
+            case INFO:
+                return Level.INFO;
+            case WARN:
+                return Level.WARN;
+            case ERROR:
+                return Level.ERROR;
+            default:
+                return Level.INFO;
+        }
+    }
 }
