@@ -25,15 +25,15 @@ package be.yildizgames.common.logging.internal;
 
 import be.yildizgames.common.logging.LoggerConfiguration;
 
-import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
+class LogbackConfigFileGenerator {
 
-public class LogbackConfigFileGenerator {
+    private static final String TCP = "TCP";
 
-    public final void generate(LoggerConfiguration configuration) throws IOException {
+    private static final String FILE = "FILE";
+
+    private static final String CONSOLE = "CONSOLE";
+
+    final String generate(LoggerConfiguration configuration) {
         LogbackLoggerLevelMapper mapper = new LogbackLoggerLevelMapper();
         StringBuilder builder = new StringBuilder();
         builder.append("<configuration>\n");
@@ -41,15 +41,15 @@ public class LogbackConfigFileGenerator {
         switch (configuration.getOutput()) {
             case TCP:
                 this.generateTcp(builder,configuration);
-                appender = "TCP";
+                appender = TCP;
                 break;
             case FILE:
                 this.generateFile(builder, configuration);
-                appender = "FILE";
+                appender = FILE;
             break;
             default:
                 this.generateConsole(builder, configuration);
-                appender = "STDOUT";
+                appender = CONSOLE;
             break;
         }
         builder
@@ -61,12 +61,14 @@ public class LogbackConfigFileGenerator {
                 .append("\" />\n")
                 .append("</root>\n")
                 .append("</configuration>\n");
-        this.writeToFile(configuration, builder.toString());
+        return builder.toString();
     }
 
     private void generateConsole(StringBuilder builder, LoggerConfiguration configuration) {
         builder
-                .append("<appender name=\"STDOUT\" class=\"ch.qos.logback.core.ConsoleAppender\">\n")
+                .append("<appender name=\"")
+                .append(CONSOLE)
+                .append("\" class=\"ch.qos.logback.core.ConsoleAppender\">\n")
                 .append("<encoder>\n")
                 .append("<pattern>\n")
                 .append(configuration.getPattern())
@@ -78,7 +80,9 @@ public class LogbackConfigFileGenerator {
     private void generateFile(StringBuilder builder, LoggerConfiguration configuration) {
         builder
                 .append("<timestamp key=\"byDay\" datePattern=\"yyyy-MM-dd\"/>\n\n")
-                .append("<appender name=\"FILE\" class=\"ch.qos.logback.core.FileAppender\">\n")
+                .append("<appender name=\"")
+                .append(FILE)
+                .append("\" class=\"ch.qos.logback.core.FileAppender\">\n")
                 .append("<file>")
                 .append(configuration.getOutputFile())
                 .append("-${byDay}.txt </file>\n")
@@ -93,7 +97,9 @@ public class LogbackConfigFileGenerator {
 
     private void generateTcp(StringBuilder builder, LoggerConfiguration configuration) {
         builder
-                .append("<appender name=\"TCP\" class=\"com.splunk.logging.TcpAppender\">")
+                .append("<appender name=\"")
+                .append(TCP)
+                .append("\" class=\"com.splunk.logging.TcpAppender\">")
                 .append("<RemoteHost>")
                 .append(configuration.getTcpHost())
                 .append("</RemoteHost>")
@@ -106,10 +112,5 @@ public class LogbackConfigFileGenerator {
                 .append("</pattern>")
                 .append("</layout>")
                 .append("</appender>");
-    }
-
-    private void writeToFile(LoggerConfiguration configuration, String generated) throws IOException {
-        Path path = Paths.get(configuration.getConfigurationFile());
-        Files.write(path, generated.getBytes(StandardCharsets.UTF_8));
     }
 }

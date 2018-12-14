@@ -29,6 +29,10 @@ import be.yildizgames.common.logging.LoggerConfiguration;
 import be.yildizgames.common.logging.PatternBuilder;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 public class LogbackLogEngine implements LogEngine {
 
@@ -47,7 +51,11 @@ public class LogbackLogEngine implements LogEngine {
 
     @Override
     public void configureFromProperties(LoggerConfiguration properties) throws IOException {
-        this.generator.generate(properties);
+        ImplementationException.throwForNull(properties);
+        String result = this.generator.generate(properties);
+        Path path = Paths.get(properties.getConfigurationFile());
+        Files.write(path, result.getBytes(StandardCharsets.UTF_8));
+        this.setConfigurationPath(properties.getConfigurationFile());
     }
 
 
