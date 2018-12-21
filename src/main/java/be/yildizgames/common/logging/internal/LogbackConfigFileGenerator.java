@@ -53,13 +53,13 @@ class LogbackConfigFileGenerator {
             break;
         }
         builder
-                .append("<root level=\"")
+                .append("  <root level=\"")
                 .append(mapper.map(configuration.getLevel()).toString())
                 .append("\">\n")
-                .append("<appender-ref ref=\"")
+                .append("    <appender-ref ref=\"")
                 .append(appender)
                 .append("\" />\n")
-                .append("</root>\n")
+                .append("  </root>\n")
                 .append("</configuration>\n");
         return builder.toString();
     }
@@ -79,38 +79,38 @@ class LogbackConfigFileGenerator {
 
     private void generateFile(StringBuilder builder, LoggerConfiguration configuration) {
         builder
-                .append("<timestamp key=\"byDay\" datePattern=\"yyyy-MM-dd\"/>\n\n")
-                .append("<appender name=\"")
+                .append("  <timestamp key=\"byDay\" datePattern=\"yyyy-MM-dd\"/>\n")
+                .append("  <appender name=\"")
                 .append(FILE)
                 .append("\" class=\"ch.qos.logback.core.FileAppender\">\n")
-                .append("<file>")
+                .append("    <file>")
                 .append(configuration.getOutputFile())
                 .append("-${byDay}.txt </file>\n")
-                .append("<append>true</append>\n")
-                .append("<encoder>\n")
-                .append("<pattern>")
+                .append("    <append>true</append>\n")
+                .append("    <encoder>\n")
+                .append("      <pattern>")
                 .append(configuration.getPattern())
                 .append("</pattern>\n")
-                .append("</encoder>\n")
-                .append("</appender>\n");
+                .append("    </encoder>\n")
+                .append("  </appender>\n");
     }
 
     private void generateTcp(StringBuilder builder, LoggerConfiguration configuration) {
         builder
-                .append("<appender name=\"")
+                .append("  <appender name=\"")
                 .append(TCP)
                 .append("\" class=\"com.splunk.logging.TcpAppender\">")
-                .append("<RemoteHost>")
+                .append("    <RemoteHost>")
                 .append(configuration.getTcpHost())
-                .append("</RemoteHost>")
-                .append("<Port>")
+                .append("</RemoteHost>\n")
+                .append("    <Port>")
                 .append(configuration.getTcpPort())
-                .append("</Port>")
-                .append("<layout class=\"ch.qos.logback.classic.PatternLayout\">")
-                .append("<pattern>")
+                .append("</Port>\n")
+                .append("    <layout class=\"ch.qos.logback.classic.PatternLayout\">\n")
+                .append("      <pattern>")
                 .append(configuration.getPattern())
                 .append("</pattern>\n")
-                .append("</layout>")
-                .append("</appender>");
+                .append("    </layout>")
+                .append("  </appender>\n");
     }
 }
