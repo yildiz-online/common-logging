@@ -55,6 +55,7 @@ public class LogbackLogEngine implements LogEngine {
         ImplementationException.throwForNull(properties);
         String result = this.generator.generate(properties);
         Path path = Paths.get(properties.getConfigurationFile());
+        Files.createDirectories(path.getParent());
         Files.write(path, result.getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE, StandardOpenOption.WRITE);
         this.setConfigurationPath(properties.getConfigurationFile());
     }

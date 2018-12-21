@@ -26,8 +26,75 @@
 
 package be.yildizgames.common.logging.internal;
 
+import be.yildizgames.common.exception.implementation.ImplementationException;
+import be.yildizgames.common.logging.LoggerConfiguration;
+import be.yildizgames.common.logging.LoggerLevel;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.Test;
+
+import java.io.IOException;
+
 /**
  * @author Grégory Van den Borre
  */
 class LogbackLogEngineTest {
+
+    @Nested
+    class ConfigureFromProperties {
+
+        private final String PATTERN_OK = "%n";
+
+        @Test
+        void nullParam() {
+            LogbackLogEngine engine = new LogbackLogEngine();
+            Assertions.assertThrows(ImplementationException.class, () -> engine.configureFromProperties(null));
+        }
+
+        @Test
+        void logbackXmlNotExist() throws IOException {
+            LogbackLogEngine engine = new LogbackLogEngine();
+            engine.configureFromProperties(givenAConfiguration(PATTERN_OK, LoggerLevel.INFO, LoggerConfiguration.SupportedOutput.CONSOLE));
+        }
+    }
+
+    private static LoggerConfiguration givenAConfiguration(String pattern, LoggerLevel level, LoggerConfiguration.SupportedOutput output) {
+        return new LoggerConfiguration() {
+            @Override
+            public String getPattern() {
+                return pattern;
+            }
+
+            @Override
+            public LoggerLevel getLevel() {
+                return level;
+            }
+
+            @Override
+            public SupportedOutput getOutput() {
+                return output;
+            }
+
+            @Override
+            public String getTcpHost() {
+                return "localhost";
+            }
+
+            @Override
+            public int getTcpPort() {
+                return 10;
+            }
+
+            @Override
+            public String getOutputFile() {
+                return "test.log";
+            }
+
+            @Override
+            public String getConfigurationFile() {
+                return "not/notExist.xml";
+            }
+        };
+    }
+
 }

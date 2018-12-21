@@ -66,11 +66,11 @@ class LogbackConfigFileGenerator {
 
     private void generateConsole(StringBuilder builder, LoggerConfiguration configuration) {
         builder
-                .append("<appender name=\"")
+                .append("  <appender name=\"")
                 .append(CONSOLE)
                 .append("\" class=\"ch.qos.logback.core.ConsoleAppender\">\n")
                 .append("<encoder>\n")
-                .append("<pattern>\n")
+                .append("<pattern>")
                 .append(configuration.getPattern())
                 .append("</pattern>\n")
                 .append("</encoder>\n")
@@ -88,7 +88,7 @@ class LogbackConfigFileGenerator {
                 .append("-${byDay}.txt </file>\n")
                 .append("<append>true</append>\n")
                 .append("<encoder>\n")
-                .append("<pattern>\n")
+                .append("<pattern>")
                 .append(configuration.getPattern())
                 .append("</pattern>\n")
                 .append("</encoder>\n")
@@ -109,7 +109,7 @@ class LogbackConfigFileGenerator {
                 .append("<layout class=\"ch.qos.logback.classic.PatternLayout\">")
                 .append("<pattern>")
                 .append(configuration.getPattern())
-                .append("</pattern>")
+                .append("</pattern>\n")
                 .append("</layout>")
                 .append("</appender>");
     }
