@@ -33,6 +33,7 @@ import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 
 public class LogbackLogEngine implements LogEngine {
 
@@ -54,7 +55,7 @@ public class LogbackLogEngine implements LogEngine {
         ImplementationException.throwForNull(properties);
         String result = this.generator.generate(properties);
         Path path = Paths.get(properties.getConfigurationFile());
-        Files.write(path, result.getBytes(StandardCharsets.UTF_8));
+        Files.write(path, result.getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE, StandardOpenOption.WRITE);
         this.setConfigurationPath(properties.getConfigurationFile());
     }
 
