@@ -25,37 +25,37 @@ package be.yildizgames.common.logging;
 
 public class DummyLoggerConfiguration implements LoggerConfiguration {
     @Override
-    public String getPattern() {
+    public String getLoggerPattern() {
         return "%n";
     }
 
     @Override
-    public LoggerLevel getLevel() {
+    public LoggerLevel getLoggerLevel() {
         return LoggerLevel.DEBUG;
     }
 
     @Override
-    public SupportedOutput getOutput() {
+    public SupportedOutput getLoggerOutput() {
         return SupportedOutput.FILE;
     }
 
     @Override
-    public String getTcpHost() {
+    public String getLoggerTcpHost() {
         return "localhost";
     }
 
     @Override
-    public int getTcpPort() {
+    public int getLoggerTcpPort() {
         return 25;
     }
 
     @Override
-    public String getOutputFile() {
+    public String getLoggerOutputFile() {
         return "/output";
     }
 
     @Override
-    public String getConfigurationFile() {
+    public String getLoggerConfigurationFile() {
         return "config";
     }
 }

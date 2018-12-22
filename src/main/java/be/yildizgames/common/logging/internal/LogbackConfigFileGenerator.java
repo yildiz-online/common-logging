@@ -38,7 +38,7 @@ class LogbackConfigFileGenerator {
         StringBuilder builder = new StringBuilder();
         builder.append("<configuration>\n");
         String appender;
-        switch (configuration.getOutput()) {
+        switch (configuration.getLoggerOutput()) {
             case TCP:
                 this.generateTcp(builder,configuration);
                 appender = TCP;
@@ -54,7 +54,7 @@ class LogbackConfigFileGenerator {
         }
         builder
                 .append("  <root level=\"")
-                .append(mapper.map(configuration.getLevel()).toString())
+                .append(mapper.map(configuration.getLoggerLevel()).toString())
                 .append("\">\n")
                 .append("    <appender-ref ref=\"")
                 .append(appender)
@@ -71,7 +71,7 @@ class LogbackConfigFileGenerator {
                 .append("\" class=\"ch.qos.logback.core.ConsoleAppender\">\n")
                 .append("    <encoder>\n")
                 .append("      <pattern>")
-                .append(configuration.getPattern())
+                .append(configuration.getLoggerPattern())
                 .append("      </pattern>\n")
                 .append("    </encoder>\n")
                 .append("  </appender>\n");
@@ -84,12 +84,12 @@ class LogbackConfigFileGenerator {
                 .append(FILE)
                 .append("\" class=\"ch.qos.logback.core.FileAppender\">\n")
                 .append("    <file>")
-                .append(configuration.getOutputFile())
+                .append(configuration.getLoggerOutputFile())
                 .append("-${byDay}.txt </file>\n")
                 .append("    <append>true</append>\n")
                 .append("    <encoder>\n")
                 .append("      <pattern>")
-                .append(configuration.getPattern())
+                .append(configuration.getLoggerPattern())
                 .append("</pattern>\n")
                 .append("    </encoder>\n")
                 .append("  </appender>\n");
@@ -101,14 +101,14 @@ class LogbackConfigFileGenerator {
                 .append(TCP)
                 .append("\" class=\"com.splunk.logging.TcpAppender\">\n")
                 .append("    <RemoteHost>")
-                .append(configuration.getTcpHost())
+                .append(configuration.getLoggerTcpHost())
                 .append("</RemoteHost>\n")
                 .append("    <Port>")
-                .append(configuration.getTcpPort())
+                .append(configuration.getLoggerTcpPort())
                 .append("</Port>\n")
                 .append("    <layout class=\"ch.qos.logback.classic.PatternLayout\">\n")
                 .append("      <pattern>")
-                .append(configuration.getPattern())
+                .append(configuration.getLoggerPattern())
                 .append("</pattern>\n")
                 .append("    </layout>")
                 .append("  </appender>\n");

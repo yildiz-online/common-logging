@@ -61,37 +61,37 @@ class LogbackLogEngineTest {
     private static LoggerConfiguration givenAConfiguration(String pattern, LoggerLevel level, LoggerConfiguration.SupportedOutput output) {
         return new LoggerConfiguration() {
             @Override
-            public String getPattern() {
+            public String getLoggerPattern() {
                 return pattern;
             }
 
             @Override
-            public LoggerLevel getLevel() {
+            public LoggerLevel getLoggerLevel() {
                 return level;
             }
 
             @Override
-            public SupportedOutput getOutput() {
+            public SupportedOutput getLoggerOutput() {
                 return output;
             }
 
             @Override
-            public String getTcpHost() {
+            public String getLoggerTcpHost() {
                 return "localhost";
             }
 
             @Override
-            public int getTcpPort() {
+            public int getLoggerTcpPort() {
                 return 10;
             }
 
             @Override
-            public String getOutputFile() {
+            public String getLoggerOutputFile() {
                 return "test.log";
             }
 
             @Override
-            public String getConfigurationFile() {
+            public String getLoggerConfigurationFile() {
                 return "not/notExist.xml";
             }
         };

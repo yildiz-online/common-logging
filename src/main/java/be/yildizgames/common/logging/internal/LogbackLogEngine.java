@@ -54,10 +54,10 @@ public class LogbackLogEngine implements LogEngine {
     public void configureFromProperties(LoggerConfiguration properties) throws IOException {
         ImplementationException.throwForNull(properties);
         String result = this.generator.generate(properties);
-        Path path = Paths.get(properties.getConfigurationFile());
+        Path path = Paths.get(properties.getLoggerConfigurationFile());
         Files.createDirectories(path.getParent());
         Files.write(path, result.getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE, StandardOpenOption.WRITE);
-        this.setConfigurationPath(properties.getConfigurationFile());
+        this.setConfigurationPath(properties.getLoggerConfigurationFile());
     }
 
 

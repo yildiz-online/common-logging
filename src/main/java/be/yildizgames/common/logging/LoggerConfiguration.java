@@ -25,19 +25,19 @@ package be.yildizgames.common.logging;
 
 public interface LoggerConfiguration {
 
-    String getPattern();
+    String getLoggerPattern();
 
-    LoggerLevel getLevel();
+    LoggerLevel getLoggerLevel();
 
-    SupportedOutput getOutput();
+    SupportedOutput getLoggerOutput();
 
-    String getTcpHost();
+    String getLoggerTcpHost();
 
-    int getTcpPort();
+    int getLoggerTcpPort();
 
-    String getOutputFile();
+    String getLoggerOutputFile();
 
-    String getConfigurationFile();
+    String getLoggerConfigurationFile();
 
     enum SupportedOutput {
 
