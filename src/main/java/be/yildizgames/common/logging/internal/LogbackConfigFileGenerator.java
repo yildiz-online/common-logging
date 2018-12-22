@@ -69,12 +69,12 @@ class LogbackConfigFileGenerator {
                 .append("  <appender name=\"")
                 .append(CONSOLE)
                 .append("\" class=\"ch.qos.logback.core.ConsoleAppender\">\n")
-                .append("<encoder>\n")
-                .append("<pattern>")
+                .append("    <encoder>\n")
+                .append("      <pattern>")
                 .append(configuration.getPattern())
-                .append("</pattern>\n")
-                .append("</encoder>\n")
-                .append("</appender>\n");
+                .append("      </pattern>\n")
+                .append("    </encoder>\n")
+                .append("  </appender>\n");
     }
 
     private void generateFile(StringBuilder builder, LoggerConfiguration configuration) {
@@ -99,7 +99,7 @@ class LogbackConfigFileGenerator {
         builder
                 .append("  <appender name=\"")
                 .append(TCP)
-                .append("\" class=\"com.splunk.logging.TcpAppender\">")
+                .append("\" class=\"com.splunk.logging.TcpAppender\">\n")
                 .append("    <RemoteHost>")
                 .append(configuration.getTcpHost())
                 .append("</RemoteHost>\n")
