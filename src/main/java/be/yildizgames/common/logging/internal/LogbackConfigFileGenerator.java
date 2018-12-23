@@ -110,7 +110,7 @@ class LogbackConfigFileGenerator {
                 .append("      <pattern>")
                 .append(configuration.getLoggerPattern())
                 .append("</pattern>\n")
-                .append("    </layout\n>")
+                .append("    </layout>\n")
                 .append("  </appender>\n");
     }
 }
