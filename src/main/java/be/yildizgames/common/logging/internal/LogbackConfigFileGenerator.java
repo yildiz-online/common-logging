@@ -72,7 +72,7 @@ class LogbackConfigFileGenerator {
                 .append("    <encoder>\n")
                 .append("      <pattern>")
                 .append(configuration.getLoggerPattern())
-                .append("      </pattern>\n")
+                .append("</pattern>\n")
                 .append("    </encoder>\n")
                 .append("  </appender>\n");
     }
