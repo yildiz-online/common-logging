@@ -38,6 +38,10 @@ public class LogbackLogEngine implements LogEngine {
 
     private final LogbackConfigFileGenerator generator = new LogbackConfigFileGenerator();
 
+    public LogbackLogEngine() {
+        this.configureForJBoss();
+    }
+
     @Override
     public PatternBuilder createPatternBuilder() {
         return new LogbackPatternBuilder();
@@ -57,6 +61,13 @@ public class LogbackLogEngine implements LogEngine {
         Files.createDirectories(path.getParent());
         Files.write(path, result.getBytes(StandardCharsets.UTF_8));
         this.setConfigurationPath(properties.getLoggerConfigurationFile());
+    }
+
+    /**
+     * Force the systems from jboss to use slf4j and logback.
+     */
+    private void configureForJBoss() {
+        System.setProperty("org.jboss.logging.provider", "slf4j");
     }
 
 
