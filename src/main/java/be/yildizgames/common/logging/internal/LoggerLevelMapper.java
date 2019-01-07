@@ -32,6 +32,11 @@ import be.yildizgames.common.logging.LoggerLevel;
  */
 public interface LoggerLevelMapper <T> {
 
+    /**
+     * MAp a logger level to an implementation level.
+     * @param level Level to map from.
+     * @return The matching implementation level.
+     */
     T map(LoggerLevel level);
 
 }

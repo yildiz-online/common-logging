@@ -25,25 +25,73 @@ package be.yildizgames.common.logging.internal;
 
 import be.yildizgames.common.logging.LoggerConfiguration;
 
+/**
+ * Generate a logback configuration file.
+ * @author Grégory Van den Borre
+ */
 class LogbackConfigFileGenerator {
 
+    /**
+     * Simple indentation spaces.
+     */
     private static final String INDENT = "  ";
 
+    /**
+     * Double indentation spaces.
+     */
     private static final String INDENT2 = INDENT + INDENT;
 
+    /**
+     * TCP output.
+     */
     private static final String TCP = "TCP";
 
+    /**
+     * File output.
+     */
     private static final String FILE = "FILE";
 
+    /**
+     * Console output.
+     */
     private static final String CONSOLE = "CONSOLE";
+
+    /**
+     * Appender tag.
+     */
     private static final String APPENDER_NAME = INDENT + "<appender name=\"";
+
+    /**
+     * Pattern tag.
+     */
     private static final String PATTERN = INDENT2 + "<pattern>";
-    private static final String PATTERN_CLOSE = "</pattern>\n";
-    private static final String APPENDER_CLOSE = INDENT + "</appender>\n";
-    private static final String ENCODER_CLOSE = INDENT2 + "</encoder>\n";
+
+    /**
+     * Encoder tag.
+     */
     private static final String ENCODER = INDENT2 + "<encoder>\n";
 
-    final String generate(LoggerConfiguration configuration) {
+    /**
+     * Closed pattern tag.
+     */
+    private static final String PATTERN_CLOSE = "</pattern>\n";
+
+    /**
+     * Closed appender tag.
+     */
+    private static final String APPENDER_CLOSE = INDENT + "</appender>\n";
+
+    /**
+     * Closed encoder tag.
+     */
+    private static final String ENCODER_CLOSE = INDENT2 + "</encoder>\n";
+
+    /**
+     * Generate the content from the configuration.
+     * @param configuration Configuration to use.
+     * @return The generated content.
+     */
+    final String generate(final LoggerConfiguration configuration) {
         LogbackLoggerLevelMapper mapper = new LogbackLoggerLevelMapper();
         StringBuilder builder = new StringBuilder();
         builder.append("<configuration>\n");
@@ -74,6 +122,11 @@ class LogbackConfigFileGenerator {
         return builder.toString();
     }
 
+    /**
+     * Generate content for the console output.
+     * @param builder stringBuilder.
+     * @param configuration configuration to use.
+     */
     private void generateConsole(StringBuilder builder, LoggerConfiguration configuration) {
         builder
                 .append(APPENDER_NAME)
@@ -87,6 +140,11 @@ class LogbackConfigFileGenerator {
                 .append(APPENDER_CLOSE);
     }
 
+    /**
+     * Generate content for the file output.
+     * @param builder stringBuilder.
+     * @param configuration configuration to use.
+     */
     private void generateFile(StringBuilder builder, LoggerConfiguration configuration) {
         builder
                 .append("  <timestamp key=\"byDay\" datePattern=\"yyyy-MM-dd\"/>\n")
@@ -105,6 +163,11 @@ class LogbackConfigFileGenerator {
                 .append(APPENDER_CLOSE);
     }
 
+    /**
+     * Generate content for the tcp output.
+     * @param builder stringBuilder.
+     * @param configuration configuration to use.
+     */
     private void generateTcp(StringBuilder builder, LoggerConfiguration configuration) {
         builder
                 .append(APPENDER_NAME)

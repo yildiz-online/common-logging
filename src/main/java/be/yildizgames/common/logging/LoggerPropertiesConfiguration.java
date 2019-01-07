@@ -5,16 +5,51 @@ import be.yildizgames.common.util.PropertiesHelper;
 
 import java.util.Properties;
 
+/**
+ * Logger configuration built from a property file.
+ * @author Grégory Van den Borre.
+ */
 public class LoggerPropertiesConfiguration implements LoggerConfiguration {
 
+    /**
+     * Pattern to display to message.
+     */
     private final String loggerPattern;
+
+    /**
+     * Level of the logger.
+     */
     private final LoggerLevel loggerLevel;
+
+    /**
+     * Output of the logger.
+     */
     private final SupportedOutput loggerOutput;
+
+    /**
+     * Host in case of TCP output.
+     */
     private final String loggerTcpHost;
+
+    /**
+     * Port in case of TCP output.
+     */
     private final int loggerTcpPort;
+
+    /**
+     * File in case of FILE output.
+     */
     private final String loggerFile;
+
+    /**
+     * File where the configuration will be written.
+     */
     private final String configurationFile;
 
+    /**
+     * Build the instance.
+     * @param p Properties to build from.
+     */
     private LoggerPropertiesConfiguration(final Properties p) {
         ImplementationException.throwForNull(p);
         this.loggerPattern = PropertiesHelper.getValue(p, "logger.pattern");
@@ -26,42 +61,55 @@ public class LoggerPropertiesConfiguration implements LoggerConfiguration {
         this.configurationFile = PropertiesHelper.getValue(p, "logger.configuration.file");
     }
 
+    /**
+     * Create a new configuration from a properties file.
+     * Expected properties are:
+     * logger.pattern: String.
+     * logger.level: TRACE, DEBUG, INFO, WARN, ERROR.
+     * logger.output: FILE, TCP, CONSOLE.
+     * logger.tcp.host: String.
+     * logger.tcp.port: a valid port number.
+     * logger.file.output: String.
+     * logger.configuration.file: String.
+     * @param p Properties to build from.
+     * @return The built configuration.
+     */
     public static LoggerConfiguration fromProperties(Properties p) {
         return new LoggerPropertiesConfiguration(p);
     }
 
     @Override
-    public String getLoggerPattern() {
+    public final String getLoggerPattern() {
         return this.loggerPattern;
     }
 
     @Override
-    public LoggerLevel getLoggerLevel() {
+    public final LoggerLevel getLoggerLevel() {
         return this.loggerLevel;
     }
 
     @Override
-    public SupportedOutput getLoggerOutput() {
+    public final SupportedOutput getLoggerOutput() {
         return this.loggerOutput;
     }
 
     @Override
-    public String getLoggerTcpHost() {
+    public final String getLoggerTcpHost() {
         return this.loggerTcpHost;
     }
 
     @Override
-    public int getLoggerTcpPort() {
+    public final int getLoggerTcpPort() {
         return this.loggerTcpPort;
     }
 
     @Override
-    public String getLoggerOutputFile() {
+    public final String getLoggerOutputFile() {
         return this.loggerFile;
     }
 
     @Override
-    public String getLoggerConfigurationFile() {
+    public final String getLoggerConfigurationFile() {
         return this.configurationFile;
     }
 }

@@ -23,8 +23,35 @@
  */
 package be.yildizgames.common.logging;
 
+/**
+ * Possible levels for the logger.
+ * @author Grégory Van den Borre
+ */
 public enum LoggerLevel {
 
-    TRACE, DEBUG, INFO, WARN, ERROR
+    /**
+     * To display detail messages.
+     */
+    TRACE,
+
+    /**
+     * To display debug message.
+     */
+    DEBUG,
+
+    /**
+     * To display information.
+     */
+    INFO,
+
+    /**
+     * To display warnings.
+     */
+    WARN,
+
+    /**
+     * To display error messages.
+     */
+    ERROR
 
 }
