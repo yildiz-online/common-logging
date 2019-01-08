@@ -23,25 +23,74 @@
  */
 package be.yildizgames.common.logging;
 
+/**
+ * Parameters to configure the logger.
+ * @author Grégory Van den Borre
+ */
 public interface LoggerConfiguration {
 
+    /**
+     * Provide the pattern to format the message.
+     * @return The message pattern.
+     */
     String getLoggerPattern();
 
+    /**
+     * Provide the logger level to use.
+     * @return The logger level.
+     */
     LoggerLevel getLoggerLevel();
 
+    /**
+     * Provide the chosen logger output.
+     * @return The logger output.
+     */
     SupportedOutput getLoggerOutput();
 
+    /**
+     * Provide the host if the logger output is TCP.
+     * @return The TCP output host.
+     */
     String getLoggerTcpHost();
 
+    /**
+     * Provide the port if the logger output is TCP.
+     * @return The TCP output port.
+     */
     int getLoggerTcpPort();
 
+    /**
+     * Provide the file if the logger output is FILE.
+     * @return The file output path.
+     */
     String getLoggerOutputFile();
 
+    /**
+     * Provide the file where the configuration will be written to be read by the logger engine.
+     * @return the configuration file path.
+     */
     String getLoggerConfigurationFile();
 
+    /**
+     * Possible output for the logger.
+     * @author Grégory Van den Borre
+     */
     enum SupportedOutput {
 
-        FILE, TCP, CONSOLE
+        /**
+         * To write the logs in a file.
+         */
+        FILE,
+
+        /**
+         * To send the logs over TCP.
+         */
+        TCP,
+
+        /**
+         * To display logs in the console.
+         */
+        CONSOLE
 
     }
 
