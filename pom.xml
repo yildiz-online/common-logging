@@ -43,7 +43,7 @@
   <parent>
     <artifactId>parent</artifactId>
     <groupId>be.yildiz-games</groupId>
-    <version>2.2.5</version>
+    <version>3.0.1</version>
   </parent>
 
   <dependencies>
@@ -79,12 +79,7 @@
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>
-      <artifactId>junit-jupiter-api</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.junit.platform</groupId>
-      <artifactId>junit-platform-launcher</artifactId>
+      <artifactId>junit-jupiter-engine</artifactId>
       <scope>test</scope>
     </dependency>
     <dependency>
@@ -94,11 +89,4 @@
     </dependency>
   </dependencies>
 
-  <distributionManagement>
-    <repository>
-      <id>yildiz-nexus-release</id>
-      <name>Releases</name>
-      <url>https://nexus.yildiz-games.be/repository/Yildiz-Engine-Release/</url>
-    </repository>
-  </distributionManagement>
 </project>
