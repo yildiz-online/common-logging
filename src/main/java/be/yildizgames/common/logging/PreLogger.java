@@ -83,7 +83,6 @@ public class PreLogger {
      */
     private void print(final String s) {
         Date date = new Date();
-        System.out.println(dateFormat.format(date));
         System.out.println(dateFormat.format(date) + "    " + s);
     }
 
