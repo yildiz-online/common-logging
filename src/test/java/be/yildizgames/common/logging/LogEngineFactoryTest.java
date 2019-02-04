@@ -33,13 +33,13 @@ import org.junit.jupiter.api.Test;
 /**
  * @author Grégory Van den Borre
  */
-class LogEngineFactoryTest {
+public class LogEngineFactoryTest {
 
     @Nested
-    class GetLogEngine {
+    public class GetLogEngine {
 
         @Test
-        void happyFlow() {
+        public void happyFlow() {
             LogEngine engine = LogEngineFactory.getLogEngine();
             Assertions.assertNotNull(engine);
         }

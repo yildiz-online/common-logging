@@ -33,13 +33,13 @@ import org.junit.jupiter.api.Test;
 /**
  * @author Grégory Van den Borre
  */
-class LogbackConfigFileGeneratorTest {
+public class LogbackConfigFileGeneratorTest {
 
     @Nested
-    class Generate {
+    public class Generate {
 
         @Test
-        void happyFlow() {
+        public void happyFlow() {
             LogbackConfigFileGenerator generator = new LogbackConfigFileGenerator();
             String result = generator.generate(new DummyLoggerConfiguration());
             System.out.println(result);

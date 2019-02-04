@@ -38,21 +38,21 @@ import java.io.IOException;
 /**
  * @author Grégory Van den Borre
  */
-class LogbackLogEngineTest {
+public class LogbackLogEngineTest {
 
     @Nested
-    class ConfigureFromProperties {
+    public class ConfigureFromProperties {
 
         private final String PATTERN_OK = "%n";
 
         @Test
-        void nullParam() {
+        public void nullParam() {
             LogbackLogEngine engine = new LogbackLogEngine();
             Assertions.assertThrows(ImplementationException.class, () -> engine.configureFromProperties(null));
         }
 
         @Test
-        void logbackXmlNotExist() throws IOException {
+        public void logbackXmlNotExist() throws IOException {
             LogbackLogEngine engine = new LogbackLogEngine();
             engine.configureFromProperties(givenAConfiguration(PATTERN_OK, LoggerLevel.INFO, LoggerConfiguration.SupportedOutput.CONSOLE));
         }
