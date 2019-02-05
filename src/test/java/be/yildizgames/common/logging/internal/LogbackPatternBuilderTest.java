@@ -30,7 +30,7 @@ import org.junit.jupiter.api.Test;
 public class LogbackPatternBuilderTest {
 
     @Nested
-    class Build {
+    public class Build {
 
         @Test
         public void happyFlow() {
