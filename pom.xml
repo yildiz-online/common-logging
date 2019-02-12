@@ -31,7 +31,7 @@
   <url>https://bitbucket.org/yildiz-engine-team/common-logging</url>
 
   <artifactId>common-logging</artifactId>
-  <version>2.1.2</version>
+  <version>3.0.0</version>
 
   <packaging>jar</packaging>
   <inceptionYear>2017</inceptionYear>
@@ -43,7 +43,7 @@
   <parent>
     <artifactId>parent</artifactId>
     <groupId>be.yildiz-games</groupId>
-    <version>3.0.3</version>
+    <version>3.0.4</version>
   </parent>
 
   <dependencies>
@@ -51,26 +51,6 @@
       <groupId>be.yildiz-games</groupId>
       <artifactId>common-util</artifactId>
       <version>1.0.4</version>
-    </dependency>
-    <dependency>
-      <groupId>com.splunk.logging</groupId>
-      <artifactId>splunk-library-javalogging</artifactId>
-      <version>1.6.2</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.httpcomponents</groupId>
-      <artifactId>httpclient</artifactId>
-      <version>4.5.7</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.httpcomponents</groupId>
-      <artifactId>httpcore</artifactId>
-      <version>4.4.11</version>
-    </dependency>
-    <dependency>
-      <groupId>ch.qos.logback</groupId>
-      <artifactId>logback-classic</artifactId>
-      <version>1.2.3</version>
     </dependency>
     <dependency>
       <groupId>org.slf4j</groupId>

@@ -2,9 +2,9 @@
  *
  * This file is part of the Yildiz-Engine project, licenced under the MIT License  (MIT)
  *
- * Copyright (c) 2019 Grégory Van den Borre
+ * Copyright (c) 2018 Grégory Van den Borre
  *
- * More infos available: https://engine.yildiz-games.be
+ * More infos available: https://www.yildiz-games.be
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
  * documentation files (the "Software"), to deal in the Software without restriction, including without
@@ -24,27 +24,27 @@
  *
  */
 
-package be.yildizgames.common.logging.internal;
+package be.yildizgames.common.logging;
 
-import be.yildizgames.common.logging.DummyLoggerConfiguration;
-import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.Test;
+import be.yildizgames.common.exception.implementation.ImplementationException;
+
+import java.util.ServiceLoader;
 
 /**
+ * Provide the log engine.
  * @author Grégory Van den Borre
  */
-public class LogbackConfigFileGeneratorTest {
+public interface LogEngineProvider {
 
-    @Nested
-    public class Generate {
+    /**
+     * Provide the engine.
+     * @return The log engine.
+     */
+    LogEngine getLogEngine();
 
-        @Test
-        public void happyFlow() {
-            LogbackConfigFileGenerator generator = new LogbackConfigFileGenerator();
-            String result = generator.generate(new DummyLoggerConfiguration());
-            System.out.println(result);
-        }
-
+    static LogEngineProvider getLoggerProvider() {
+        ServiceLoader<LogEngineProvider> provider = ServiceLoader.load(LogEngineProvider.class);
+        return provider.findFirst().orElseThrow(() -> ImplementationException.missingImplementation("logger"));
     }
-
 }
+
