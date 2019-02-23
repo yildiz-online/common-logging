@@ -31,7 +31,7 @@
   <url>https://bitbucket.org/yildiz-engine-team/common-logging</url>
 
   <artifactId>common-logging</artifactId>
-  <version>3.0.0</version>
+  <version>3.1.0</version>
 
   <packaging>jar</packaging>
   <inceptionYear>2017</inceptionYear>
@@ -55,7 +55,7 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <version>1.7.25</version>
+      <version>1.7.26</version>
     </dependency>
     <dependency>
       <groupId>org.junit.jupiter</groupId>

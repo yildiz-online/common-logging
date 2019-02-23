@@ -23,6 +23,8 @@
  */
 package be.yildizgames.common.logging;
 
+import java.util.List;
+
 /**
  * Parameters to configure the logger.
  * @author Grégory Van den Borre
@@ -70,6 +72,8 @@ public interface LoggerConfiguration {
      * @return the configuration file path.
      */
     String getLoggerConfigurationFile();
+
+    List<String> getLoggerToDisable();
 
     /**
      * Possible output for the logger.

@@ -3,6 +3,8 @@ package be.yildizgames.common.logging;
 import be.yildizgames.common.exception.implementation.ImplementationException;
 import be.yildizgames.common.util.PropertiesHelper;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -46,6 +48,8 @@ public class LoggerPropertiesConfiguration implements LoggerConfiguration {
      */
     private final String configurationFile;
 
+    private final List<String> loggerToDisable;
+
     /**
      * Build the instance.
      * @param p Properties to build from.
@@ -59,6 +63,8 @@ public class LoggerPropertiesConfiguration implements LoggerConfiguration {
         this.loggerTcpPort = PropertiesHelper.getIntValue(p, "logger.tcp.port");
         this.loggerFile = PropertiesHelper.getValue(p, "logger.file.output");
         this.configurationFile = PropertiesHelper.getValue(p, "logger.configuration.file");
+        String disable = PropertiesHelper.getValue(p, "logger.disabled");
+        this.loggerToDisable = Arrays.asList(disable.split(","));
     }
 
     /**
@@ -111,5 +117,10 @@ public class LoggerPropertiesConfiguration implements LoggerConfiguration {
     @Override
     public final String getLoggerConfigurationFile() {
         return this.configurationFile;
+    }
+
+    @Override
+    public final List<String> getLoggerToDisable() {
+        return this.loggerToDisable;
     }
 }

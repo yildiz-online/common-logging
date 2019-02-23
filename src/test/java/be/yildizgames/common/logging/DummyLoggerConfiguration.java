@@ -23,7 +23,10 @@
  */
 package be.yildizgames.common.logging;
 
+import java.util.List;
+
 public class DummyLoggerConfiguration implements LoggerConfiguration {
+
     @Override
     public String getLoggerPattern() {
         return "%n";
@@ -57,5 +60,10 @@ public class DummyLoggerConfiguration implements LoggerConfiguration {
     @Override
     public String getLoggerConfigurationFile() {
         return "config";
+    }
+
+    @Override
+    public List<String> getLoggerToDisable() {
+        return List.of();
     }
 }
