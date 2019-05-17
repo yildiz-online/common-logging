@@ -67,4 +67,5 @@ public class LoggerPropertiesConfigurationTest {
             Assertions.assertEquals(Arrays.asList("azerty","qwerty"), configuration.getLoggerToDisable());
         }
     }
+
 }

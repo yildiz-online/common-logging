@@ -123,4 +123,5 @@ public class LoggerPropertiesConfiguration implements LoggerConfiguration {
     public final List<String> getLoggerToDisable() {
         return this.loggerToDisable;
     }
+
 }

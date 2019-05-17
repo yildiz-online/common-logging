@@ -97,5 +97,4 @@ public interface LoggerConfiguration {
         CONSOLE
 
     }
-
 }

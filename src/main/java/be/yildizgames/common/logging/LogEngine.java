@@ -58,4 +58,5 @@ public interface LogEngine {
      * @return The prelogger.
      */
     PreLogger getPrelogger();
+
 }
