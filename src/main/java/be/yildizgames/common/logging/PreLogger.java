@@ -33,6 +33,7 @@ import java.util.Date;
 /**
  * This class is used to display message before the logging is configured.
  * The displayed message is time [level] message.
+ *
  * @author Grégory Van den Borre
  */
 public class PreLogger {

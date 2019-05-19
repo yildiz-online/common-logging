@@ -1,9 +1,7 @@
 package be.yildizgames.common.logging;
 
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -11,6 +9,9 @@ import org.junit.jupiter.api.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
+/**
+ * @author Grégory Van den Borre
+ */
 public class PreLoggerTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();

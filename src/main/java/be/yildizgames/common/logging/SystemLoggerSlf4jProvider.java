@@ -41,4 +41,5 @@ public class SystemLoggerSlf4jProvider extends System.LoggerFinder {
     public final System.Logger getLogger(final String name, final Module module) {
         return new SystemLoggerSlf4j(LoggerFactory.getLogger(name));
     }
+
 }

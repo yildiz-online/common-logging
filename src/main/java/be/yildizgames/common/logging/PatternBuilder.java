@@ -26,6 +26,7 @@ package be.yildizgames.common.logging;
 
 /**
  * Create a formatted string to configure a log engine.
+ *
  * @author Grégory Van den Borre
  */
 public interface PatternBuilder {

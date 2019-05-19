@@ -25,6 +25,9 @@ package be.yildizgames.common.logging;
 
 import java.util.List;
 
+/**
+ * @author Grégory Van den Borre
+ */
 public class DummyLoggerConfiguration implements LoggerConfiguration {
 
     @Override
