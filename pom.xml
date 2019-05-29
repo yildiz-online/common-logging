@@ -29,7 +29,7 @@
   <modelVersion>4.0.0</modelVersion>
   <name>Yildiz Common Logging</name>
   <description>Common Logging library for the yildiz project, contains utilities to log.</description>
-  <url>https://bitbucket.org/yildiz-engine-team/common-logging</url>
+  <url>https://engine.yildiz-games.be</url>
 
   <artifactId>common-logging</artifactId>
   <version>3.2.0-SNAPSHOT</version>
@@ -37,9 +37,9 @@
   <packaging>jar</packaging>
   <inceptionYear>2017</inceptionYear>
   <scm>
-    <connection>scm:git:https://bitbucket.org/yildiz-engine-team/common-logging</connection>
-    <developerConnection>scm:git:https://bitbucket.org/yildiz-engine-team/common-logging</developerConnection>
-    <url>https://bitbucket.org/yildiz-engine-team/common-logging</url>
+    <connection>scm:git:https://github.com/yildiz-online/common-logging</connection>
+    <developerConnection>scm:git:https://github.com/yildiz-online/common-logging</developerConnection>
+    <url>https://github.com/yildiz-online/common-logging</url>
   </scm>
   <parent>
     <artifactId>parent</artifactId>
