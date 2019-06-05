@@ -53,11 +53,6 @@
 
   <dependencies>
     <dependency>
-      <groupId>be.yildiz-games</groupId>
-      <artifactId>common-util</artifactId>
-      <version>1.0.5</version>
-    </dependency>
-    <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
       <version>1.7.26</version>

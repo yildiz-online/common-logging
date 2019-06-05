@@ -26,8 +26,6 @@
 
 package be.yildizgames.common.logging;
 
-import be.yildizgames.common.exception.implementation.ImplementationException;
-
 import java.util.ServiceLoader;
 
 /**
@@ -44,7 +42,7 @@ public interface LogEngineProvider {
 
     static LogEngineProvider getLoggerProvider() {
         ServiceLoader<LogEngineProvider> provider = ServiceLoader.load(LogEngineProvider.class);
-        return provider.findFirst().orElseThrow(() -> ImplementationException.missingImplementation("logger"));
+        return provider.findFirst().orElseThrow(() -> new IllegalStateException("No provider found."));
     }
 }
 
