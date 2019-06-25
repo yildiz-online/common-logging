@@ -48,7 +48,7 @@ public class PreLogger {
      * @param message Message to display.
      */
     public final void info(final String message) {
-        this.print("[INFO] :" + message);
+        this.print(" | INFO | be.yildizgames.common.logging.Prelogger | " + message);
     }
 
     /**
@@ -56,7 +56,7 @@ public class PreLogger {
      * @param message Message to display.
      */
     public final void warn(final String message) {
-        this.print("[WARN] :" + message);
+        this.print(" | WARN | be.yildizgames.common.logging.Prelogger | " + message);
     }
 
     /**
@@ -64,7 +64,7 @@ public class PreLogger {
      * @param message Message to display.
      */
     public final void error(final String message) {
-        this.print("[ERROR]:" + message);
+        this.print(" | ERROR| be.yildizgames.common.logging.Prelogger | " + message);
     }
 
     /**
@@ -84,7 +84,7 @@ public class PreLogger {
      */
     private void print(final String s) {
         Date date = new Date();
-        System.out.println(dateFormat.format(date) + "    " + s);
+        System.out.println(dateFormat.format(date) + s);
     }
 
 }

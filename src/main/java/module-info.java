@@ -29,6 +29,7 @@ import be.yildizgames.common.logging.SystemLoggerSlf4jProvider;
 module be.yildizgames.common.logging {
 
     requires slf4j.api;
+    requires be.yildizgames.common.properties;
 
     provides java.lang.System.LoggerFinder with SystemLoggerSlf4jProvider;
 
