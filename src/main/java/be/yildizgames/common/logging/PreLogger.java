@@ -73,8 +73,8 @@ public class PreLogger {
      * @param e Exception to print stacktrace.
      */
     public final void error(final String message, final Exception e) {
-        this.print("[ERROR]:" + message);
-        this.print(e.getMessage());
+        this.print(" | ERROR| be.yildizgames.common.logging.Prelogger | " + message);
+        this.print(" | ERROR| be.yildizgames.common.logging.Prelogger | " + e.getMessage());
         e.printStackTrace(System.out);
     }
 
