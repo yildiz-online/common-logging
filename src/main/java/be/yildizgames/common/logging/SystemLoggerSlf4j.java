@@ -116,5 +116,10 @@ public class SystemLoggerSlf4j implements System.Logger {
                 break;
         }
     }
+    
+    @Override
+    public final String toString() {
+        return "System Logger SLF4J";
+    }
 
 }
