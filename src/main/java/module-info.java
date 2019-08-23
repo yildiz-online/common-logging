@@ -31,6 +31,8 @@ module be.yildizgames.common.logging {
     requires org.slf4j;
     requires be.yildizgames.common.properties;
 
+    uses be.yildizgames.common.logging.LogEngineProvider;
+
     provides java.lang.System.LoggerFinder with SystemLoggerSlf4jProvider;
 
     exports be.yildizgames.common.logging;
