@@ -1,10 +1,10 @@
 package be.yildizgames.common.logging;
 
-import be.yildizgames.common.exception.implementation.ImplementationException;
-import be.yildizgames.common.util.PropertiesHelper;
+import be.yildizgames.common.properties.PropertiesHelper;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 import java.util.Properties;
 
 /**
@@ -12,6 +12,22 @@ import java.util.Properties;
  * @author Grégory Van den Borre.
  */
 public class LoggerPropertiesConfiguration implements LoggerConfiguration {
+
+    public static final String LOGGER_PATTERN_KEY = "logger.pattern";
+
+    public static final String LOGGER_LEVEL_KEY = "logger.level";
+
+    public static final String LOGGER_OUTPUT_KEY = "logger.output";
+
+    public static final String LOGGER_TCP_HOST_KEY = "logger.tcp.host";
+
+    public static final String LOGGER_TCP_PORT_KEY = "logger.tcp.port";
+
+    public static final String LOGGER_FILE_OUTPUT_KEY = "logger.file.output";
+
+    public static final String LOGGER_CONFIGURATION_FILE_KEY = "logger.configuration.file";
+
+    public static final String LOGGER_DISABLED_KEY = "logger.disabled";
 
     /**
      * Pattern to display to message.
@@ -55,15 +71,15 @@ public class LoggerPropertiesConfiguration implements LoggerConfiguration {
      * @param p Properties to build from.
      */
     private LoggerPropertiesConfiguration(final Properties p) {
-        ImplementationException.throwForNull(p);
-        this.loggerPattern = PropertiesHelper.getValue(p, "logger.pattern");
-        this.loggerLevel = LoggerLevel.valueOf(PropertiesHelper.getValue(p, "logger.level").toUpperCase());
-        this.loggerOutput = SupportedOutput.valueOf(PropertiesHelper.getValue(p, "logger.output").toUpperCase());
-        this.loggerTcpHost = PropertiesHelper.getValue(p, "logger.tcp.host");
-        this.loggerTcpPort = PropertiesHelper.getIntValue(p, "logger.tcp.port");
-        this.loggerFile = PropertiesHelper.getValue(p, "logger.file.output");
-        this.configurationFile = PropertiesHelper.getValue(p, "logger.configuration.file");
-        String disable = PropertiesHelper.getValue(p, "logger.disabled");
+        Objects.requireNonNull(p);
+        this.loggerPattern = PropertiesHelper.getValue(p, LOGGER_PATTERN_KEY);
+        this.loggerLevel = LoggerLevel.valueOf(PropertiesHelper.getValue(p, LOGGER_LEVEL_KEY).toUpperCase());
+        this.loggerOutput = SupportedOutput.valueOf(PropertiesHelper.getValue(p, LOGGER_OUTPUT_KEY).toUpperCase());
+        this.loggerTcpHost = PropertiesHelper.getValue(p, LOGGER_TCP_HOST_KEY);
+        this.loggerTcpPort = PropertiesHelper.getIntValue(p, LOGGER_TCP_PORT_KEY);
+        this.loggerFile = PropertiesHelper.getValue(p, LOGGER_FILE_OUTPUT_KEY);
+        this.configurationFile = PropertiesHelper.getValue(p, LOGGER_CONFIGURATION_FILE_KEY);
+        String disable = PropertiesHelper.getValue(p, LOGGER_DISABLED_KEY);
         this.loggerToDisable = Arrays.asList(disable.split(","));
     }
 
@@ -123,4 +139,5 @@ public class LoggerPropertiesConfiguration implements LoggerConfiguration {
     public final List<String> getLoggerToDisable() {
         return this.loggerToDisable;
     }
+
 }

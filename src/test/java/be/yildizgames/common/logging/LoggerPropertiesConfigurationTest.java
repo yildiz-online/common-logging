@@ -26,7 +26,8 @@
 
 package be.yildizgames.common.logging;
 
-import be.yildizgames.common.exception.implementation.ImplementationException;
+import be.yildizgames.common.logging.LoggerConfiguration;
+import be.yildizgames.common.logging.LoggerLevel;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -42,7 +43,7 @@ public class LoggerPropertiesConfigurationTest {
 
         @Test
         public void nullProperties() {
-            Assertions.assertThrows(ImplementationException.class, () -> LoggerPropertiesConfiguration.fromProperties(null));
+            Assertions.assertThrows(NullPointerException.class, () -> LoggerPropertiesConfiguration.fromProperties(null));
         }
 
         @Test
@@ -67,4 +68,5 @@ public class LoggerPropertiesConfigurationTest {
             Assertions.assertEquals(Arrays.asList("azerty","qwerty"), configuration.getLoggerToDisable());
         }
     }
+
 }

@@ -53,5 +53,4 @@ public enum LoggerLevel {
      * To display error messages.
      */
     ERROR
-
 }

@@ -51,11 +51,4 @@ public interface LogEngine {
      * @throws IOException If the file cannot be written properly.
      */
     void configureFromProperties(LoggerConfiguration properties) throws IOException;
-
-    /**
-     * Provide a prelogger to display log message before the logger is configured.
-     * Only use it in very early stage of application initialization.
-     * @return The prelogger.
-     */
-    PreLogger getPrelogger();
 }

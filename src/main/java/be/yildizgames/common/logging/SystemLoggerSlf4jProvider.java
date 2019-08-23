@@ -26,23 +26,25 @@
 
 package be.yildizgames.common.logging;
 
-import java.util.ServiceLoader;
+import org.slf4j.LoggerFactory;
 
 /**
- * Provide the log engine.
+ * This create an instance of SystemLoggerSlf4j.
+ * This module provide it, so any other module requiring this module will have the system logger finder configured to
+ * create instances of SystemLoggerSlf4j.
+ *
  * @author Grégory Van den Borre
  */
-public interface LogEngineProvider {
+public class SystemLoggerSlf4jProvider extends System.LoggerFinder {
 
-    /**
-     * Provide the engine.
-     * @return The log engine.
-     */
-    LogEngine getLogEngine();
-
-    static LogEngineProvider getLoggerProvider() {
-        ServiceLoader<LogEngineProvider> provider = ServiceLoader.load(LogEngineProvider.class);
-        return provider.findFirst().orElseThrow(() -> new IllegalStateException("No provider found."));
+    @Override
+    public final System.Logger getLogger(final String name, final Module module) {
+        return new SystemLoggerSlf4j(LoggerFactory.getLogger(name));
     }
-}
+    
+    @Override
+    public final String toString() {
+        return "System Logger SLF4J finder";
+    }
 
+}
