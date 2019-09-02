@@ -32,12 +32,24 @@ public class Logger {
         this.logger.log(System.Logger.Level.INFO, message);
     }
 
+    public final void info(String format, Object... params) {
+        this.logger.log(System.Logger.Level.INFO, format, params);
+    }
+
     public final void warning(String message) {
         this.logger.log(System.Logger.Level.WARNING, message);
     }
 
+    public final void warning(String format, Object... params) {
+        this.logger.log(System.Logger.Level.WARNING, format, params);
+    }
+
     public final void error(String message) {
         this.logger.log(System.Logger.Level.ERROR, message);
+    }
+
+    public final void error(String format, Object... params) {
+        this.logger.log(System.Logger.Level.ERROR, format, params);
     }
 
     public final void error(Throwable throwable) {
@@ -46,5 +58,9 @@ public class Logger {
 
     public final void debug(String message) {
         this.logger.log(System.Logger.Level.DEBUG, message);
+    }
+
+    public final void debug(String format, Object... params) {
+        this.logger.log(System.Logger.Level.DEBUG, format, params);
     }
 }
