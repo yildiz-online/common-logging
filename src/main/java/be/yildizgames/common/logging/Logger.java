@@ -28,6 +28,10 @@ public class Logger {
         return new Logger(clazz.getName());
     }
 
+    public static Logger getLogger(Object o) {
+        return getLogger(o.getClass());
+    }
+
     public final void info(String message) {
         this.logger.log(System.Logger.Level.INFO, message);
     }
