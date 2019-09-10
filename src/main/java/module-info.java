@@ -26,7 +26,7 @@ import be.yildizgames.common.logging.SystemLoggerSlf4jProvider;
 /**
  * @author Grégory Van den Borre
  */
-module be.yildizgames.common.logging {
+open module be.yildizgames.common.logging {
 
     requires org.slf4j;
     requires be.yildizgames.common.properties;

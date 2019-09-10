@@ -26,8 +26,6 @@
 
 package be.yildizgames.common.logging;
 
-import be.yildizgames.common.logging.LoggerConfiguration;
-import be.yildizgames.common.logging.LoggerLevel;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -35,19 +33,19 @@ import org.junit.jupiter.api.Test;
 import java.util.Arrays;
 import java.util.Properties;
 
-public class LoggerPropertiesConfigurationTest {
+class LoggerPropertiesConfigurationTest {
 
     @Nested
-    public class FromProperties {
+    class FromProperties {
 
 
         @Test
-        public void nullProperties() {
+        void nullProperties() {
             Assertions.assertThrows(NullPointerException.class, () -> LoggerPropertiesConfiguration.fromProperties(null));
         }
 
         @Test
-        public void happyFlow() {
+        void happyFlow() {
             Properties properties = new Properties();
             properties.setProperty("logger.pattern", "%n");
             properties.setProperty("logger.level", "info");
