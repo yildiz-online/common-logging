@@ -21,8 +21,6 @@
  *  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  SOFTWARE.
  *
  */
-import be.yildizgames.common.logging.SystemLoggerSlf4jProvider;
-
 /**
  * @author Grégory Van den Borre
  */
@@ -33,7 +31,8 @@ open module be.yildizgames.common.logging {
 
     uses be.yildizgames.common.logging.LogEngineProvider;
 
-    provides java.lang.System.LoggerFinder with SystemLoggerSlf4jProvider;
+    provides java.lang.System.LoggerFinder with
+            be.yildizgames.common.logging.SystemLoggerSlf4jProvider;
 
     exports be.yildizgames.common.logging;
 }
