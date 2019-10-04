@@ -12,7 +12,7 @@ import java.io.PrintStream;
 /**
  * @author Grégory Van den Borre
  */
-public class PreLoggerTest {
+class PreLoggerTest {
 
     private final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
     private final ByteArrayOutputStream errContent = new ByteArrayOutputStream();
@@ -20,36 +20,36 @@ public class PreLoggerTest {
     private final PrintStream originalErr = System.err;
 
     @BeforeEach
-    public void setUpStreams() {
+    void setUpStreams() {
         System.setOut(new PrintStream(outContent));
         System.setErr(new PrintStream(errContent));
     }
 
     @AfterEach
-    public void restoreStreams() {
+    void restoreStreams() {
         System.setOut(originalOut);
         System.setErr(originalErr);
     }
 
     @Nested
-    public class Log {
+    class Log {
 
         @Test
-        public void info() {
+        void info() {
             PreLogger preLogger = new PreLogger();
             preLogger.info("test");
             Assertions.assertTrue(outContent.toString().trim().matches("20\\d{2}/\\d{2}/\\d{2}\\s\\d{2}:\\d{2}:\\d{2}\\s\\|\\sINFO\\s\\|\\sbe\\.yildizgames\\.common\\.logging\\.Prelogger\\s\\|\\stest"));
         }
 
         @Test
-        public void warn() {
+        void warn() {
             PreLogger preLogger = new PreLogger();
             preLogger.warn("test");
             Assertions.assertTrue(outContent.toString().trim().matches("20\\d{2}/\\d{2}/\\d{2}\\s\\d{2}:\\d{2}:\\d{2}\\s\\|\\sWARN\\s\\|\\sbe\\.yildizgames\\.common\\.logging\\.Prelogger\\s\\|\\stest"));
         }
 
         @Test
-        public void error() {
+        void error() {
             PreLogger preLogger = new PreLogger();
             preLogger.error("test");
            Assertions.assertTrue(outContent.toString().trim().matches("20\\d{2}/\\d{2}/\\d{2}\\s\\d{2}:\\d{2}:\\d{2}\\s\\|\\sERROR\\|\\sbe\\.yildizgames\\.common\\.logging\\.Prelogger\\s\\|\\stest"));

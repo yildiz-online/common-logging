@@ -28,6 +28,9 @@ package be.yildizgames.common.logging;
 
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * This create an instance of SystemLoggerSlf4j.
  * This module provide it, so any other module requiring this module will have the system logger finder configured to
@@ -37,9 +40,11 @@ import org.slf4j.LoggerFactory;
  */
 public class SystemLoggerSlf4jProvider extends System.LoggerFinder {
 
+    private final Map<String, System.Logger> loggers = new HashMap<>();
+
     @Override
     public final System.Logger getLogger(final String name, final Module module) {
-        return new SystemLoggerSlf4j(LoggerFactory.getLogger(name));
+        return loggers.computeIfAbsent(name, n -> new SystemLoggerSlf4j(LoggerFactory.getLogger(n)));
     }
     
     @Override
