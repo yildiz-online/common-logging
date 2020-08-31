@@ -59,7 +59,31 @@ class LoggerPropertiesConfigurationTest {
             Assertions.assertEquals("%n", configuration.getLoggerPattern());
             Assertions.assertEquals("file.log", configuration.getLoggerConfigurationFile());
             Assertions.assertEquals("root/dr", configuration.getLoggerOutputFile());
-            Assertions.assertEquals(LoggerConfiguration.SupportedOutput.CONSOLE, configuration.getLoggerOutput());
+            Assertions.assertEquals(1, configuration.getLoggerOutputs().size());
+            Assertions.assertEquals(LoggerConfiguration.SupportedOutput.CONSOLE, configuration.getLoggerOutputs().get(0));
+            Assertions.assertEquals("localhost", configuration.getLoggerTcpHost());
+            Assertions.assertEquals(12345, configuration.getLoggerTcpPort());
+            Assertions.assertEquals(LoggerLevel.INFO, configuration.getLoggerLevel());
+            Assertions.assertEquals(Arrays.asList("azerty","qwerty"), configuration.getLoggerToDisable());
+        }
+        @Test
+        void multipleAppenders() {
+            Properties properties = new Properties();
+            properties.setProperty("logger.pattern", "%n");
+            properties.setProperty("logger.level", "info");
+            properties.setProperty("logger.output", "console, file");
+            properties.setProperty("logger.tcp.host", "localhost");
+            properties.setProperty("logger.tcp.port", "12345");
+            properties.setProperty("logger.file.output", "root/dr");
+            properties.setProperty("logger.configuration.file", "file.log");
+            properties.setProperty("logger.disabled", "azerty,qwerty");
+            LoggerConfiguration configuration = LoggerPropertiesConfiguration.fromProperties(properties);
+            Assertions.assertEquals("%n", configuration.getLoggerPattern());
+            Assertions.assertEquals("file.log", configuration.getLoggerConfigurationFile());
+            Assertions.assertEquals("root/dr", configuration.getLoggerOutputFile());
+            Assertions.assertEquals(2, configuration.getLoggerOutputs().size());
+            Assertions.assertEquals(LoggerConfiguration.SupportedOutput.CONSOLE, configuration.getLoggerOutputs().get(0));
+            Assertions.assertEquals(LoggerConfiguration.SupportedOutput.FILE, configuration.getLoggerOutputs().get(1));
             Assertions.assertEquals("localhost", configuration.getLoggerTcpHost());
             Assertions.assertEquals(12345, configuration.getLoggerTcpPort());
             Assertions.assertEquals(LoggerLevel.INFO, configuration.getLoggerLevel());

@@ -45,9 +45,17 @@ public interface LoggerConfiguration {
 
     /**
      * Provide the chosen logger output.
+     * @deprecated Use getLoggerOutputs instead.
      * @return The logger output.
      */
+    @Deprecated
     SupportedOutput getLoggerOutput();
+
+    /**
+     * Provide the chosen logger output.
+     * @return The logger output.
+     */
+    default List<SupportedOutput> getLoggerOutputs() {return List.of(getLoggerOutput());}
 
     /**
      * Provide the host if the logger output is TCP.
