@@ -6,6 +6,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
+import java.util.stream.Collectors;
 
 /**
  * Logger configuration built from a property file.
@@ -42,7 +43,7 @@ public class LoggerPropertiesConfiguration implements LoggerConfiguration {
     /**
      * Output of the logger.
      */
-    private final SupportedOutput loggerOutput;
+    private final List<SupportedOutput> loggerOutputs;
 
     /**
      * Host in case of TCP output.
@@ -74,7 +75,11 @@ public class LoggerPropertiesConfiguration implements LoggerConfiguration {
         Objects.requireNonNull(p);
         this.loggerPattern = PropertiesHelper.getValue(p, LOGGER_PATTERN_KEY);
         this.loggerLevel = LoggerLevel.valueOf(PropertiesHelper.getValue(p, LOGGER_LEVEL_KEY).toUpperCase());
-        this.loggerOutput = SupportedOutput.valueOf(PropertiesHelper.getValue(p, LOGGER_OUTPUT_KEY).toUpperCase());
+        this.loggerOutputs = Arrays.stream(PropertiesHelper.getValue(p, LOGGER_OUTPUT_KEY).split(","))
+                .map(String::trim)
+                .map(String::toUpperCase)
+                .map(SupportedOutput::valueOf)
+                .collect(Collectors.toList());
         this.loggerTcpHost = PropertiesHelper.getValue(p, LOGGER_TCP_HOST_KEY);
         this.loggerTcpPort = PropertiesHelper.getIntValue(p, LOGGER_TCP_PORT_KEY);
         this.loggerFile = PropertiesHelper.getValue(p, LOGGER_FILE_OUTPUT_KEY);
@@ -112,7 +117,12 @@ public class LoggerPropertiesConfiguration implements LoggerConfiguration {
 
     @Override
     public final SupportedOutput getLoggerOutput() {
-        return this.loggerOutput;
+        return this.loggerOutputs.get(0);
+    }
+
+    @Override
+    public final List<SupportedOutput> getLoggerOutputs() {
+        return this.loggerOutputs;
     }
 
     @Override
