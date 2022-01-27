@@ -35,19 +35,15 @@
   <url>https://engine.yildiz-games.be</url>
 
   <artifactId>common-logging</artifactId>
-  <version>3.3.2</version>
+  <version>3.3.3</version>
 
   <parent>
     <artifactId>parent</artifactId>
     <groupId>be.yildiz-games</groupId>
-    <version>4.0.2</version>
+    <version>5.0.3</version>
   </parent>
 
   <packaging>jar</packaging>
-
-  <properties>
-    <java.version>11</java.version>
-  </properties>
 
   <scm>
     <connection>scm:git:https://github.com/yildiz-online/common-logging</connection>
@@ -59,7 +55,7 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <version>1.7.32</version>
+      <version>1.7.35</version>
     </dependency>
     <dependency>
       <groupId>be.yildiz-games</groupId>
