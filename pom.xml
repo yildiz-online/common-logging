@@ -35,7 +35,7 @@
   <url>https://engine.yildiz-games.be</url>
 
   <artifactId>common-logging</artifactId>
-  <version>3.3.3</version>
+  <version>3.3.4</version>
 
   <parent>
     <artifactId>parent</artifactId>
@@ -55,7 +55,7 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
-      <version>1.7.35</version>
+      <version>1.7.36</version>
     </dependency>
     <dependency>
       <groupId>be.yildiz-games</groupId>
