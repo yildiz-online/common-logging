@@ -57,7 +57,7 @@ public class Logger {
     }
 
     public final void error(Throwable throwable) {
-        this.logger.log(System.Logger.Level.ERROR, throwable);
+        this.logger.log(System.Logger.Level.ERROR, "", throwable);
     }
 
     public final void debug(String message) {
