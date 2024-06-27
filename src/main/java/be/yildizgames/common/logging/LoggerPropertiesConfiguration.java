@@ -20,7 +20,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.Properties;
-import java.util.stream.Collectors;
 
 /**
  * Logger configuration built from a property file.
@@ -93,7 +92,7 @@ public class LoggerPropertiesConfiguration implements LoggerConfiguration {
                 .map(String::trim)
                 .map(String::toUpperCase)
                 .map(SupportedOutput::valueOf)
-                .collect(Collectors.toList());
+                .toList();
         this.loggerTcpHost = PropertiesHelper.getValue(p, LOGGER_TCP_HOST_KEY);
         this.loggerTcpPort = PropertiesHelper.getIntValue(p, LOGGER_TCP_PORT_KEY);
         this.loggerFile = PropertiesHelper.getValue(p, LOGGER_FILE_OUTPUT_KEY);
