@@ -62,15 +62,15 @@ public class SystemLoggerSlf4j implements System.Logger {
 
     @Override
     public final boolean isLoggable(Level level) {
-        switch(level) {
-            case ALL: return true;
-            case TRACE: return this.logger.isTraceEnabled();
-            case DEBUG: return this.logger.isDebugEnabled();
-            case INFO: return this.logger.isInfoEnabled();
-            case WARNING: return this.logger.isWarnEnabled();
-            case ERROR: return this.logger.isErrorEnabled();
-            default: return false;
-        }
+        return switch (level) {
+            case ALL -> true;
+            case TRACE -> this.logger.isTraceEnabled();
+            case DEBUG -> this.logger.isDebugEnabled();
+            case INFO -> this.logger.isInfoEnabled();
+            case WARNING -> this.logger.isWarnEnabled();
+            case ERROR -> this.logger.isErrorEnabled();
+            default -> false;
+        };
     }
 
     @Override
@@ -113,6 +113,9 @@ public class SystemLoggerSlf4j implements System.Logger {
                 break;
             case ERROR:
                 this.logger.error(MessageFormat.format(format, params));
+                break;
+            default:
+                this.logger.info(MessageFormat.format("Unhandled logger level " + level.getName() + " : " + format, params));
                 break;
         }
     }
