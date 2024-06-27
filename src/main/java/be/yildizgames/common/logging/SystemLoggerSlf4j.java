@@ -88,22 +88,34 @@ public class SystemLoggerSlf4j implements System.Logger {
     public final void log(Level level, ResourceBundle bundle, String format, Object... params) {
         switch(level) {
             case TRACE:
-                this.logger.trace(MessageFormat.format(format, params));
+                if(isLoggable(Level.TRACE)) {
+                    this.logger.trace(MessageFormat.format(format, params));
+                }
                 break;
             case DEBUG:
-                this.logger.debug(MessageFormat.format(format, params));
+                if(isLoggable(Level.DEBUG)) {
+                    this.logger.debug(MessageFormat.format(format, params));
+                }
                 break;
             case INFO:
-                this.logger.info(MessageFormat.format(format, params));
+                if(isLoggable(Level.INFO)) {
+                    this.logger.info(MessageFormat.format(format, params));
+                }
                 break;
             case WARNING:
-                this.logger.warn(MessageFormat.format(format, params));
+                if(isLoggable(Level.WARNING)) {
+                    this.logger.warn(MessageFormat.format(format, params));
+                }
                 break;
             case ERROR:
-                this.logger.error(MessageFormat.format(format, params));
+                if(isLoggable(Level.ERROR)) {
+                    this.logger.error(MessageFormat.format(format, params));
+                }
                 break;
             default:
-                this.logger.info(MessageFormat.format("Unhandled logger level " + level.getName() + " : " + format, params));
+                if(isLoggable(Level.ALL)) {
+                    this.logger.info(MessageFormat.format("Unhandled logger level " + level.getName() + " : " + format, params));
+                }
                 break;
         }
     }
