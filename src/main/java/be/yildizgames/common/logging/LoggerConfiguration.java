@@ -34,19 +34,12 @@ public interface LoggerConfiguration {
      */
     LoggerLevel getLoggerLevel();
 
-    /**
-     * Provide the chosen logger output.
-     * @deprecated Use getLoggerOutputs instead.
-     * @return The logger output.
-     */
-    @Deprecated
-    SupportedOutput getLoggerOutput();
 
     /**
-     * Provide the chosen logger output.
-     * @return The logger output.
+     * Provide the chosen logger outputs.
+     * @return The logger outputs.
      */
-    default List<SupportedOutput> getLoggerOutputs() {return List.of(getLoggerOutput());}
+    List<SupportedOutput> getLoggerOutputs();
 
     /**
      * Provide the host if the logger output is TCP.

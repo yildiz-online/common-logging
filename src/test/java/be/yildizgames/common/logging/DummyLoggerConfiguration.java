@@ -32,8 +32,8 @@ public class DummyLoggerConfiguration implements LoggerConfiguration {
     }
 
     @Override
-    public SupportedOutput getLoggerOutput() {
-        return SupportedOutput.FILE;
+    public List<SupportedOutput> getLoggerOutputs() {
+        return List.of(SupportedOutput.FILE);
     }
 
     @Override

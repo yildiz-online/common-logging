@@ -130,11 +130,6 @@ public class LoggerPropertiesConfiguration implements LoggerConfiguration {
     }
 
     @Override
-    public final SupportedOutput getLoggerOutput() {
-        return this.loggerOutputs.get(0);
-    }
-
-    @Override
     public final List<SupportedOutput> getLoggerOutputs() {
         return this.loggerOutputs;
     }
