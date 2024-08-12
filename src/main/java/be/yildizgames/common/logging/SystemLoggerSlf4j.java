@@ -1,29 +1,17 @@
 /*
- *
- * This file is part of the Yildiz-Engine project, licenced under the MIT License  (MIT)
- *
- * Copyright (c) 2019 Grégory Van den Borre
- *
- * More infos available: https://engine.yildiz-games.be
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
- * documentation files (the "Software"), to deal in the Software without restriction, including without
- * limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
- * of the Software, and to permit persons to whom the Software is furnished to do so,
- * subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in all copies or substantial
- *  portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
- *  WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS
- * OR COPYRIGHT  HOLDERS BE LIABLE FOR ANY CLAIM,
- *  DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE  SOFTWARE.
- *
- *
+ This file is part of the Yildiz-Engine project, licenced under the MIT License  (MIT)
+ Copyright (c) 2019-2024 Grégory Van den Borre
+ More infos available: https://engine.yildiz-games.be
+ Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+ documentation files (the "Software"), to deal in the Software without restriction, including without limitation
+ the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to
+ permit persons to whom the Software is furnished to do so, subject to the following conditions: The above copyright
+ notice and this permission notice shall be included in all copies or substantial portions of the  Software.
+ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+ WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS
+ OR COPYRIGHT  HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
-
 package be.yildizgames.common.logging;
 
 
@@ -62,15 +50,15 @@ public class SystemLoggerSlf4j implements System.Logger {
 
     @Override
     public final boolean isLoggable(Level level) {
-        switch(level) {
-            case ALL: return true;
-            case TRACE: return this.logger.isTraceEnabled();
-            case DEBUG: return this.logger.isDebugEnabled();
-            case INFO: return this.logger.isInfoEnabled();
-            case WARNING: return this.logger.isWarnEnabled();
-            case ERROR: return this.logger.isErrorEnabled();
-            default: return false;
-        }
+        return switch (level) {
+            case ALL -> true;
+            case TRACE -> this.logger.isTraceEnabled();
+            case DEBUG -> this.logger.isDebugEnabled();
+            case INFO -> this.logger.isInfoEnabled();
+            case WARNING -> this.logger.isWarnEnabled();
+            case ERROR -> this.logger.isErrorEnabled();
+            default -> false;
+        };
     }
 
     @Override
@@ -100,19 +88,34 @@ public class SystemLoggerSlf4j implements System.Logger {
     public final void log(Level level, ResourceBundle bundle, String format, Object... params) {
         switch(level) {
             case TRACE:
-                this.logger.trace(MessageFormat.format(format, params));
+                if(isLoggable(Level.TRACE)) {
+                    this.logger.trace(MessageFormat.format(format, params));
+                }
                 break;
             case DEBUG:
-                this.logger.debug(MessageFormat.format(format, params));
+                if(isLoggable(Level.DEBUG)) {
+                    this.logger.debug(MessageFormat.format(format, params));
+                }
                 break;
             case INFO:
-                this.logger.info(MessageFormat.format(format, params));
+                if(isLoggable(Level.INFO)) {
+                    this.logger.info(MessageFormat.format(format, params));
+                }
                 break;
             case WARNING:
-                this.logger.warn(MessageFormat.format(format, params));
+                if(isLoggable(Level.WARNING)) {
+                    this.logger.warn(MessageFormat.format(format, params));
+                }
                 break;
             case ERROR:
-                this.logger.error(MessageFormat.format(format, params));
+                if(isLoggable(Level.ERROR)) {
+                    this.logger.error(MessageFormat.format(format, params));
+                }
+                break;
+            default:
+                if(isLoggable(Level.ALL)) {
+                    this.logger.info(MessageFormat.format("Unhandled logger level " + level.getName() + " : " + format, params));
+                }
                 break;
         }
     }
