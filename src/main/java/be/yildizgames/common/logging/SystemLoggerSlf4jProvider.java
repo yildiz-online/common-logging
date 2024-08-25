@@ -32,7 +32,11 @@ public class SystemLoggerSlf4jProvider extends System.LoggerFinder {
 
     @Override
     public final System.Logger getLogger(final String name, final Module module) {
-        return this.loggers.computeIfAbsent(name, k -> loggers.put(name, new SystemLoggerSlf4j(LoggerFactory.getLogger(name))));
+        var logger = this.loggers.get(name);
+        if(logger == null) {
+            this.loggers.put(name, new SystemLoggerSlf4j(LoggerFactory.getLogger(name)));
+        }
+        return this.loggers.get(name);
     }
     
     @Override
